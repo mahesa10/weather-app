@@ -8,10 +8,10 @@ const capitalizeDesc = (desc) => {
   return splitStr.join(' ');
 }
 
-// const convertToKmh = (speed) => {
-//   let kmh = speed * 3.6
-//   return Math.round(kmh * 10) / 10 
-// }
+const convertToKmh = (speed) => {
+  let kmh = speed * 3.6
+  return Math.round(kmh * 10) / 10 
+}
 
 const getData = async(city) => {
   let weatherData = await fetchWeather(city);
@@ -26,7 +26,7 @@ const getData = async(city) => {
     const temp = weatherData.main.temp;
     const feelsLike = weatherData.main.feels_like;
     const humidity = weatherData.main.humidity;
-    const wind = weatherData.wind.speed;
+    const wind = convertToKmh(weatherData.wind.speed);
 
   return {
     cityName,

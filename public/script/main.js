@@ -42,7 +42,7 @@ searchForm.addEventListener('submit', async(e) => {
   e.preventDefault();
   if (inputCity.value === '') return;
 
-  weather = await getData(inputCity.value);
+  const weather = await getData(inputCity.value);
   resetDisplay();
   displayData(weather);
 })

@@ -1,4 +1,4 @@
-import getData from "./data-handling.js";
+import  { getData, convertToCelcius, convertToFahrenheit } from "./data-handling.js";
 
 const city = document.querySelector('.city');
 const condition = document.querySelector('.condition');
@@ -28,8 +28,8 @@ const displayData = (weatherData) => {
 
   city.innerText = `City: ${weatherData.cityName}`;
   condition.innerText = `Condition: ${weatherData.condition}`;
-  temperature.innerText = `Temperature: ${weatherData.temp}`;
-  feelsLike.innerText = `Feels Like: ${weatherData.feelsLike}`;
+  temperature.innerText = `Temperature: ${convertToCelcius(weatherData.temp)}`;
+  feelsLike.innerText = `Feels Like: ${convertToCelcius(weatherData.feelsLike)}`;
   wind.innerText = `Wind: ${weatherData.wind}`;
   humidity.innerText = `Humidity: ${weatherData.humidity}`;
 }
@@ -42,7 +42,12 @@ searchForm.addEventListener('submit', async(e) => {
   e.preventDefault();
   if (inputCity.value === '') return;
 
-  const weather = await getData(inputCity.value);
+  weather = await getData(inputCity.value);
   resetDisplay();
   displayData(weather);
+})
+
+window.addEventListener('load', async() => {
+  const defaultWeather = await getData('jakarta');
+  displayData(defaultWeather);
 })

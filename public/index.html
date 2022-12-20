@@ -9,6 +9,20 @@
   <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-  
+  <div class="header">
+    <form id="search-form">
+      <input type="text" class="border-b border-black" id="input-city" placeholder="Search city">
+      <button type="submit" id="search-btn">Search</button>
+    </form>
+  </div>
+  <div class="main-container">
+    <h1 class="not-found hidden">No matching city found</h1>
+    <h1 class="city"></h1>
+    <h2 class="condition"></h2>
+    <span class="temperature"></span>
+    <p class="feels-like"></p>
+    <p class="wind"></p>
+    <p class="humidity"></p>
+  </div>
 </body>
 </html>

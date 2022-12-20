@@ -1,32 +1,48 @@
-import fetchWeather from "./api.js";
+import getData from "./data-handling.js";
 
-const getData = async(city) => {
-  let weatherData = await fetchWeather(city);
+const city = document.querySelector('.city');
+const condition = document.querySelector('.condition');
+const temperature = document.querySelector('.temperature');
+const feelsLike = document.querySelector('.feels-like');
+const wind = document.querySelector('.wind');
+const humidity = document.querySelector('.humidity');
 
-  if (weatherData === 'city not found') {
-    return weatherData;
-  }
+const notFound = document.querySelector('.not-found');
 
-  return {
-    cityName: weatherData.name,
-    country: weatherData.sys.country,
-    condition: weatherData.weather[0].description,
-    temp: weatherData.main.temp,
-    feelsLike: weatherData.main.feels_like,
-    humidity: weatherData.main.humidity,
-    wind: weatherData.wind.speed
-  }
+const resetDisplay = () => {
+  city.innerText = '';
+  condition.innerText = '';
+  temperature.innerText = '';
+  feelsLike.innerText = '';
+  wind.innerText = '';
+  humidity.innerText = '';
+
+  notFound.className = 'not-found hidden';
 }
 
-const displayWeather = async(city) => {
-  let weather = await getData(city);
-
-  if (weather === "city not found") {
-    console.log(weather[0].toUpperCase() + weather.substr(1));
+const displayData = (weatherData) => {
+  if (weatherData === 'city not found') {
+    notFound.className = 'not-found';
     return;
   }
 
-  console.log(`City: ${weather.cityName}, Country: ${weather.country}, Condition: ${weather.condition}, Temperature: ${weather.temp}`)
+  city.innerText = `City: ${weatherData.cityName}`;
+  condition.innerText = `Condition: ${weatherData.condition}`;
+  temperature.innerText = `Temperature: ${weatherData.temp}`;
+  feelsLike.innerText = `Feels Like: ${weatherData.feelsLike}`;
+  wind.innerText = `Wind: ${weatherData.wind}`;
+  humidity.innerText = `Humidity: ${weatherData.humidity}`;
 }
 
-displayWeather('jakarta');
+const searchForm = document.querySelector('#search-form')
+const inputCity = document.querySelector('#input-city');
+const searchBtn = document.querySelector('#search-btn');
+
+searchForm.addEventListener('submit', async(e) => {
+  e.preventDefault();
+  if (inputCity.value === '') return;
+
+  const weather = await getData(inputCity.value);
+  resetDisplay();
+  displayData(weather);
+})

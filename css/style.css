@@ -513,15 +513,23 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
-.text-3xl {
-  font-size: 1.875rem;
-  line-height: 2.25rem;
+.visible {
+  visibility: visible;
 }
 
-.font-bold {
-  font-weight: 700;
+.invisible {
+  visibility: hidden;
 }
 
-.underline {
-  text-decoration-line: underline;
+.hidden {
+  display: none;
+}
+
+.border-b {
+  border-bottom-width: 1px;
+}
+
+.border-black {
+  --tw-border-opacity: 1;
+  border-color: rgb(0 0 0 / var(--tw-border-opacity));
 }

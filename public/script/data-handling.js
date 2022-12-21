@@ -20,13 +20,13 @@ const getData = async(city) => {
     return weatherData;
   }
 
-    const cityName = weatherData.name;
-    const country = weatherData.sys.country;
-    const condition = capitalizeDesc(weatherData.weather[0].description);
-    const temp = weatherData.main.temp;
-    const feelsLike = weatherData.main.feels_like;
-    const humidity = weatherData.main.humidity;
-    const wind = convertToKmh(weatherData.wind.speed);
+  const cityName = weatherData.name;
+  const country = weatherData.sys.country;
+  const condition = capitalizeDesc(weatherData.weather[0].description);
+  const temp = weatherData.main.temp;
+  const feelsLike = weatherData.main.feels_like;
+  const humidity = weatherData.main.humidity;
+  const wind = convertToKmh(weatherData.wind.speed);
 
   return {
     cityName,
@@ -41,12 +41,12 @@ const getData = async(city) => {
 
 const convertToCelcius = (temp) => {
   let result = temp - 273.15;
-  return parseInt(result);
+  return Math.round(result);
 }
 
 const convertToFahrenheit = (temp) => {
   let result = (temp - 273.15) * 9 / 5 + 32;
-  return parseInt(result);
+  return Math.round(result);
 }
 
 export { getData, convertToCelcius, convertToFahrenheit };

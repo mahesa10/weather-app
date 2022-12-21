@@ -26,12 +26,12 @@ const displayData = (weatherData) => {
     return;
   }
 
-  city.innerText = `City: ${weatherData.cityName}`;
-  condition.innerText = `Condition: ${weatherData.condition}`;
-  temperature.innerText = `Temperature: ${convertToCelcius(weatherData.temp)}`;
-  feelsLike.innerText = `Feels Like: ${convertToCelcius(weatherData.feelsLike)}`;
-  wind.innerText = `Wind: ${weatherData.wind}`;
-  humidity.innerText = `Humidity: ${weatherData.humidity}`;
+  city.innerText = `${weatherData.cityName}, ${weatherData.country}`;
+  condition.innerText = `${weatherData.condition}`;
+  temperature.innerHTML = `${convertToCelcius(weatherData.temp)}<span class="temp-scale text-3xl">&deg;C</span>`;
+  feelsLike.innerHTML = `Feels Like ${convertToCelcius(weatherData.feelsLike)}&deg;`;
+  wind.innerText = `${weatherData.wind} km/h`;
+  humidity.innerText = `${weatherData.humidity}%`;
 }
 
 const searchForm = document.querySelector('#search-form')

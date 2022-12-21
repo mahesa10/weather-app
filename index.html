@@ -9,20 +9,34 @@
   <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-  <div class="header">
-    <form id="search-form">
-      <input type="text" class="border-b border-black" id="input-city" placeholder="Search city">
-      <button type="submit" id="search-btn">Search</button>
-    </form>
-  </div>
-  <div class="main-container">
-    <h1 class="not-found hidden">No matching city found</h1>
-    <h1 class="city"></h1>
-    <h2 class="condition"></h2>
-    <span class="temperature"></span>
-    <p class="feels-like"></p>
-    <p class="wind"></p>
-    <p class="humidity"></p>
+  <div id="wrapper" class="flex flex-col min-h-screen">
+    <div class="header h-16 flex justify-center items-center">
+      <form id="search-form" class="flex flex-row gap-3">
+        <input type="text" class="border-b border-black" id="input-city" placeholder="Search city">
+        <button type="submit" id="search-btn">Search</button>
+      </form>
+    </div>
+    <div class="main-container h-full p-32 grid grid-cols-2 grow">
+      <h1 class="not-found col-span-2 justify-self-center text-2xl hidden">No matching city found</h1>
+      <div class="left-side col-start-1 flex flex-col justify-between">
+        <h1 class="city text-5xl"></h1>
+        <h2 class="condition text-3xl"></h2>
+      </div>
+      <div class="right-side col-start-2 flex flex-col justify-between">
+        <div class="temp-container flex flex-col gap-3">
+          <h1 class="temperature text-7xl flex self-end"></h1>
+          <p class="feels-like text-xl text-right"></p>
+        </div>
+        <div class="wind-container text-right">
+          <h3 class="text-xl">Wind</h3>
+          <p class="wind text-3xl"></p>
+        </div>
+        <div class="humidity-container text-right">
+          <h3 class="text-xl">Humidity</h3>
+          <p class="humidity text-3xl"></p>
+        </div>
+      </div>
+    </div>
   </div>
 </body>
 </html>

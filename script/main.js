@@ -156,6 +156,7 @@ searchForm.addEventListener('submit', async(e) => {
   const weather = await getData(inputCity.value);
   resetDisplay();
   displayData(weather);
+  inputCity.value = '';
 })
 
 window.addEventListener('load', async() => {

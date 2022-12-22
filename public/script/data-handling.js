@@ -22,20 +22,32 @@ const getData = async(city) => {
 
   const cityName = weatherData.name;
   const country = weatherData.sys.country;
+  const conditionId = weatherData.weather[0].id;
   const condition = capitalizeDesc(weatherData.weather[0].description);
   const temp = weatherData.main.temp;
   const feelsLike = weatherData.main.feels_like;
   const humidity = weatherData.main.humidity;
   const wind = convertToKmh(weatherData.wind.speed);
+  
+  const isDaytime = () => {
+    if (weatherData.dt >= weatherData.sys.sunrise && weatherData.dt < weatherData.sys.sunset) {
+      return true;
+    }
+  
+    return false;
+  }
+  
 
   return {
     cityName,
     country,
+    conditionId,
     condition,
     temp,
     feelsLike,
     humidity,
-    wind
+    wind,
+    isDaytime
   }
 }
 

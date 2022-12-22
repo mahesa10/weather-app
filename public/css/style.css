@@ -545,10 +545,6 @@ video {
   height: 100%;
 }
 
-.h-10 {
-  height: 2.5rem;
-}
-
 .min-h-screen {
   min-height: 100vh;
 }
@@ -630,15 +626,6 @@ video {
   background-color: transparent;
 }
 
-.bg-slate-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(100 116 139 / var(--tw-bg-opacity));
-}
-
-.bg-\[url\(\'\.\.\/bg-image\/clear-night\.jpg\'\)\] {
-  background-image: url('../bg-image/clear-night.jpg');
-}
-
 .bg-cover {
   background-size: cover;
 }
@@ -663,6 +650,14 @@ video {
 .py-24 {
   padding-top: 6rem;
   padding-bottom: 6rem;
+}
+
+.pt-24 {
+  padding-top: 6rem;
+}
+
+.pb-32 {
+  padding-bottom: 8rem;
 }
 
 .text-right {

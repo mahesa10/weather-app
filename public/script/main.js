@@ -1,5 +1,6 @@
 import  { getData, convertToCelcius, convertToFahrenheit } from "./data-handling.js";
 
+const wrapper = document.querySelector('#wrapper')
 const city = document.querySelector('.city');
 const condition = document.querySelector('.condition');
 const temperature = document.querySelector('.temperature');
@@ -15,11 +16,11 @@ const notFound = document.querySelector('.not-found');
 const weatherIcon = {
   clearSky: {
     day: './icons/clear-sky-day.svg',
-    night: './/icons/clear-sky-night.svg'
+    night: './icons/clear-sky-night.svg'
   },
   fewClouds: {
     day: './icons/partially-cloud-day.svg',
-    night: './icons/partially-cloud-day.svg'
+    night: './icons/partially-cloud-night.svg'
   },
   scatteredClouds: './icons/scattered-clouds.svg',
   brokenClouds: './icons/broken-clouds.svg',
@@ -29,18 +30,19 @@ const weatherIcon = {
   mist: './icons/mist.svg'
 }
 
-const resetDisplay = () => {
-  city.innerText = '';
-  condition.innerText = '';
-  temperature.innerText = '';
-  feelsLike.innerText = '';
-  wind.innerText = '';
-  humidity.innerText = '';
-  windLabel.classList.remove('hidden');
-  humidityLabel.classList.remove('hidden');
-  conditionIcon.classList.remove('hidden');
-
-  notFound.classList.add('hidden');
+const bgImages = {
+  clearSky: {
+    day: './bg-image/clear-day.jpg',
+    night: './bg-image/clear-night.jpg'
+  },
+  clouds: {
+    day: './bg-image/clouds.jpg',
+    night: './bg-image/cloud-night.jpg'
+  },
+  rain: './bg-image/rain.jpg',
+  thunderstorm: './bg-image/thunderstorm.jpg',
+  mist: './bg-image/mist.jpg',
+  snow: './bg-image/snow.jpg'
 }
 
 const getWeatherIcon = (weatherData) => {
@@ -76,6 +78,55 @@ const getWeatherIcon = (weatherData) => {
   return `<img src=${iconSrc}>`;
 }
 
+const getBgImage = (weatherData) => {
+  let imageSrc
+  let id = weatherData.conditionId;
+
+  if (id >= 200 && id < 300) {
+    imageSrc = bgImages.thunderstorm;
+  } else if ((id >= 300 && id < 400) || (id >= 500 && id < 600)) {
+    imageSrc = bgImages.rain;
+  } else if (id >= 600 && id < 700) {
+    imageSrc = bgImages.snow;
+  } else if (id >= 700 && id < 800) {
+    imageSrc = bgImages.mist;
+  } else if (id === 800) {
+    if (weatherData.isDaytime()) {
+      imageSrc = bgImages.clearSky.day;
+    } else {
+      imageSrc = bgImages.clearSky.night;
+    }
+  } else if (id === 801) {
+    if (weatherData.isDaytime()) {
+      imageSrc = bgImages.clearSky.day;
+    } else {
+      imageSrc = bgImages.clouds.night;
+    }
+  } else if (id >= 802 && id <= 804) {
+    if (weatherData.isDaytime()) {
+      imageSrc = bgImages.clouds.day;
+    } else {
+      imageSrc = bgImages.clouds.night;
+    }
+  }
+
+  return `url(${imageSrc})`
+}
+
+const resetDisplay = () => {
+  city.innerText = '';
+  condition.innerText = '';
+  temperature.innerText = '';
+  feelsLike.innerText = '';
+  wind.innerText = '';
+  humidity.innerText = '';
+  windLabel.classList.remove('hidden');
+  humidityLabel.classList.remove('hidden');
+  conditionIcon.classList.remove('hidden');
+
+  notFound.classList.add('hidden');
+}
+
 const displayData = (weatherData) => {
   if (weatherData === 'city not found') {
     windLabel.classList.add('hidden');
@@ -85,6 +136,7 @@ const displayData = (weatherData) => {
     return;
   }
 
+  wrapper.style.backgroundImage = getBgImage(weatherData);
   city.innerText = `${weatherData.cityName}, ${weatherData.country}`;
   condition.innerText = `${weatherData.condition}`;
   conditionIcon.innerHTML = getWeatherIcon(weatherData);
